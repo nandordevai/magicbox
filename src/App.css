@@ -1,0 +1,5 @@
+#root {
+  height: clamp(10rem, 60dvh, 20rem);
+  margin: 0 auto;
+  width: clamp(20rem, 60dvw, 40rem);
+}
