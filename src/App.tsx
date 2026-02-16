@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Bounds, ContactShadows, OrbitControls } from '@react-three/drei'
+import { useStore } from './store'
+import { Sidebar } from './Sidebar'
 import './App.css'
 
-function Box({ width, height, depth, pos }) {
-  pos[1] += height / 2 + 0.25
+function Box() {
+  const { width, height, depth} = useStore()
+  const yPos = height / 2 + 0.1
+
   return (
     <mesh
-      position={pos}
+      position={[0, yPos, 0]}
       rotation={[0, Math.PI / 4, 0]}
       castShadow
     >
@@ -22,8 +26,6 @@ function Box({ width, height, depth, pos }) {
 
 export default function App() {
   const [count, setCount] = useState(0)
-  const [size, setSize] = useState({ w: 1, h: 1, d: 1})
-  const pos = [0, 0, 0]
 
   useEffect(() => {
     if (import.meta.hot) {
@@ -34,26 +36,38 @@ export default function App() {
   }, [])
 
   return (
-    <Canvas key={count} shadows camera={{ position: [0, 5, 5], fov: 60 }}>
-      <color attach="background" args={['#f0f0f0']} />
+    <>
+      <main className='viewport'>
+        <Canvas
+          className="canvas"
+          camera={{ position: [0, 5, 5], fov: 60 }}
+          dpr={[1, 2]}
+          key={count}
+          shadows
+        >
 
-      <Bounds fit observe margin={1.5}>
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[0.5, 1, 1]} color="#fff" castShadow />
-        <Box width={size.w} height={size.h} depth={size.d} pos={pos} />
-      </Bounds>
+          <Bounds fit observe margin={2}>
+            <ambientLight intensity={0.5} />
+            <directionalLight position={[0.5, 1, 1]} color="#fff" castShadow />
+            <Box />
+          </Bounds>
 
-      <ContactShadows
-        position={[0, -0.1, 0]}
-        opacity={0.8}
-        scale={20}
-        blur={2}
-        far={10}
-      />
+          <ContactShadows
+            position={[0, 0, 0]}
+            opacity={0.8}
+            scale={20}
+            blur={2}
+            far={50}
+          />
 
-      <OrbitControls target={pos} />
-      {/* <gridHelper args={[10, 10]} /> */}
+          <OrbitControls makeDefault />
+          {/* <gridHelper args={[10, 10]} /> */}
 
-    </Canvas>
+        </Canvas>
+      </main>
+      <aside className="sidebar">
+        <Sidebar />
+      </aside>
+    </>
   )
 }

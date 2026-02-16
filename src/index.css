@@ -12,8 +12,26 @@
 }
 
 body {
-  display: flex;
+  display: grid;
+  height: 100dvh;
+  font-family: 'Helvetica', 'Arial', system-ui, sans-serif;
   place-items: center;
-  min-width: 100dvw;
-  min-height: 100dvh;
 }
+
+#root {
+  background:
+    linear-gradient(white) padding-box,
+    linear-gradient(
+      to bottom,
+      oklch(0.9 0 0 / 0.2),
+      oklch(0.9 0 0 / 0.8)
+    ) border-box;
+  border: 0.2rem solid transparent;
+  border-radius: 1rem;
+  box-shadow: 0 0 1rem oklch(0.6 0 0 / 0.8);
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  height: clamp(10rem, 80dvh, 30rem);
+  width: clamp(20rem, 60dvw, 40rem);
+}
+
