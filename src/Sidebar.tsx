@@ -1,3 +1,4 @@
+import { ColorPicker } from './ColorPicker'
 import { Slider } from './Slider'
 import { useStore } from './store'
 import './Sidebar.css'
@@ -26,6 +27,8 @@ export function Sidebar() {
         value={depth}
         onChange={(val) => setSize('d', val)}
       />
+
+      <ColorPicker />
 
     </aside>
   )

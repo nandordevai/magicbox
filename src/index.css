@@ -6,6 +6,8 @@
 
   --accent-color: oklch(0.4 0.1 240);
   --shadow-color: oklch(0.6 0 0 / 0.6);
+
+  --ui-font-size: 0.8rem;
 }
 
 * {

@@ -20,7 +20,7 @@ function SmartBounds() {
 }
 
 function Box() {
-  const { width, height, depth } = useStore()
+  const { width, height, depth, color } = useStore()
   const yPos = height / 2 + 0.4
 
   return (
@@ -33,7 +33,7 @@ function Box() {
         key={`${width}-${height}-${depth}`}
         args={[width, height, depth]}
       />
-      <meshPhongMaterial color="#ff0000" />
+      <meshPhongMaterial color={color} />
     </mesh>
   )
 }
