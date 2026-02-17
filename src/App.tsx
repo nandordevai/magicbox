@@ -54,16 +54,17 @@ export default function App() {
       <main className='viewport'>
         <Canvas
           className="canvas"
-          camera={{ position: [0, 5, 5], fov: 60 }}
+          camera={{ position: [0, 3, 5], fov: 60 }}
           dpr={[1, 2]}
           key={count}
           shadows
+          gl={{ preserveDrawingBuffer: true }}
         >
 
-          <ambientLight intensity={0.5} />
-          <directionalLight position={[0.5, 1, 1]} color="#fff" castShadow />
+          <ambientLight intensity={0.75} />
+          <directionalLight position={[0.5, 1, 1.5]} color="#fff" castShadow />
 
-          <Bounds fit clip observe margin={1.2}>
+          <Bounds fit clip observe margin={1.5}>
             <SmartBounds />
             <Box />
           </Bounds>

@@ -13,7 +13,7 @@ export const useStore = create<BoxState>((set) => ({
   width: 1,
   height: 1,
   depth: 1,
-  color: '#ff0000',
+  color: '#69f',
   setColor: (val) => set({ color: val}),
   setSize: (dim, val) => set((state) => ({
     ...state,
