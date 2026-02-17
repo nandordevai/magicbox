@@ -1,3 +1,4 @@
+import { Slider } from './Slider'
 import { useStore } from './store'
 import './Sidebar.css'
 
@@ -8,35 +9,24 @@ export function Sidebar() {
     <aside className="sidebar">
       <h2>Box Settings</h2>
 
-      <div className="control-group">
-        <label>Width ({width})</label>
-        <input
-          className='slider'
-          type="range" min="0.1" max="5" step="0.1"
-          value={width}
-          onChange={(e) => setSize('w', parseFloat(e.target.value))}
-        />
-      </div>
+      <Slider
+        label="Width"
+        value={width}
+        onChange={(val) => setSize('w', val)}
+      />
 
-      <div className="control-group">
-        <label>Height ({height})</label>
-        <input
-          className='slider'
-          type="range" min="0.1" max="5" step="0.1"
-          value={height}
-          onChange={(e) => setSize('h', parseFloat(e.target.value))}
-        />
-      </div>
+      <Slider
+        label="Height"
+        value={height}
+        onChange={(val) => setSize('h', val)}
+      />
 
-      <div className="control-group">
-        <label>Depth ({depth})</label>
-        <input
-          className='slider'
-          type="range" min="0.1" max="5" step="0.1"
-          value={depth}
-          onChange={(e) => setSize('d', parseFloat(e.target.value))}
-        />
-      </div>
+      <Slider
+        label="Depth"
+        value={depth}
+        onChange={(val) => setSize('d', val)}
+      />
+
     </aside>
   )
 }

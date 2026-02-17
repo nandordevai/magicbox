@@ -3,6 +3,9 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --accent-color: oklch(0.4 0.1 240);
+  --shadow-color: oklch(0.6 0 0 / 0.6);
 }
 
 * {
@@ -12,6 +15,18 @@
 }
 
 body {
+  backdrop-filter: blur(10px);
+  background:
+    radial-gradient(
+      oklch(0.9 0.05 280 / 0.1),
+      oklch(0.9 0.05 280 / 0.1) 60%,
+      oklch(0.9 0.05 280 / 0.25)
+    ),
+    linear-gradient(
+      135deg,
+      oklch(1 0.05 200 / 0.1),
+      oklch(1 0.05 200 / 0.6)
+    );
   display: grid;
   height: 100dvh;
   font-family: 'Helvetica', 'Arial', system-ui, sans-serif;
@@ -23,10 +38,10 @@ body {
     linear-gradient(white) padding-box,
     linear-gradient(
       to bottom,
-      oklch(0.9 0 0 / 0.2),
-      oklch(0.9 0 0 / 0.8)
+      oklch(1 0 0),
+      oklch(0.75 0 0 / 0.8)
     ) border-box;
-  border: 0.2rem solid transparent;
+  border: 0.1rem solid transparent;
   border-radius: 1rem;
   box-shadow: 0 0 1rem oklch(0.6 0 0 / 0.8);
   display: grid;
@@ -34,4 +49,3 @@ body {
   height: clamp(10rem, 80dvh, 30rem);
   width: clamp(20rem, 60dvw, 40rem);
 }
-

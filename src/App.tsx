@@ -65,9 +65,7 @@ export default function App() {
 
         </Canvas>
       </main>
-      <aside className="sidebar">
-        <Sidebar />
-      </aside>
+      <Sidebar />
     </>
   )
 }
