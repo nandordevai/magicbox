@@ -35,13 +35,13 @@ body {
 
 #root {
   background:
-    linear-gradient(white) padding-box,
+    linear-gradient(oklch(0.98 0 0)) padding-box,
     linear-gradient(
       to bottom,
       oklch(1 0 0),
       oklch(0.75 0 0 / 0.8)
     ) border-box;
-  border: 0.1rem solid transparent;
+  border: 1px solid transparent;
   border-radius: 1rem;
   box-shadow: 0 0 1rem oklch(0.6 0 0 / 0.8);
   display: grid;

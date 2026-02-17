@@ -1,13 +1,27 @@
 import { useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { Bounds, ContactShadows, OrbitControls } from '@react-three/drei'
+import { Bounds, ContactShadows, OrbitControls, useBounds } from '@react-three/drei'
 import { useStore } from './store'
 import { Sidebar } from './Sidebar'
 import './App.css'
 
+function SmartBounds() {
+  const api = useBounds()
+  const { width, height, depth } = useStore()
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      api.refresh().clip().fit()
+    }, 150)
+    return () => clearTimeout(handler)
+  }, [width, height, depth, api])
+
+  return null
+}
+
 function Box() {
-  const { width, height, depth} = useStore()
-  const yPos = height / 2 + 0.1
+  const { width, height, depth } = useStore()
+  const yPos = height / 2 + 0.4
 
   return (
     <mesh
@@ -46,9 +60,11 @@ export default function App() {
           shadows
         >
 
-          <Bounds fit observe margin={2}>
-            <ambientLight intensity={0.5} />
-            <directionalLight position={[0.5, 1, 1]} color="#fff" castShadow />
+          <ambientLight intensity={0.5} />
+          <directionalLight position={[0.5, 1, 1]} color="#fff" castShadow />
+
+          <Bounds fit clip observe margin={1.2}>
+            <SmartBounds />
             <Box />
           </Bounds>
 
