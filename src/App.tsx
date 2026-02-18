@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { Bounds, ContactShadows, OrbitControls, useBounds } from '@react-three/drei'
 import { useStore } from './store'
 import { Sidebar } from './Sidebar'
+import { Case } from './Case'
 import './App.css'
 
 function SmartBounds() {
@@ -17,25 +18,6 @@ function SmartBounds() {
   }, [width, height, depth, api])
 
   return null
-}
-
-function Box() {
-  const { width, height, depth, color } = useStore()
-  const yPos = height / 2 + 0.4
-
-  return (
-    <mesh
-      position={[0, yPos, 0]}
-      rotation={[0, Math.PI / 4, 0]}
-      castShadow
-    >
-      <boxGeometry
-        key={`${width}-${height}-${depth}`}
-        args={[width, height, depth]}
-      />
-      <meshPhongMaterial color={color} />
-    </mesh>
-  )
 }
 
 export default function App() {
@@ -66,7 +48,7 @@ export default function App() {
 
           <Bounds fit clip observe margin={1.5}>
             <SmartBounds />
-            <Box />
+            <Case />
           </Bounds>
 
           <ContactShadows

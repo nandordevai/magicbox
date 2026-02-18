@@ -10,9 +10,9 @@ interface BoxState {
 }
 
 export const useStore = create<BoxState>((set) => ({
-  width: 1,
-  height: 1,
-  depth: 1,
+  width: 40,
+  height: 10,
+  depth: 20,
   color: '#69f',
   setColor: (val) => set({ color: val}),
   setSize: (dim, val) => set((state) => ({
