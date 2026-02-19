@@ -34,14 +34,6 @@ export function Case() {
 
   return (
     <group dispose={null}>
-      {/* <mesh position={[0, 0, 0]}>
-        <boxGeometry
-          args={
-            [current.width * 0.01, current.height * 0.01, current.depth * 0.01]
-          }
-        />
-        <meshBasicMaterial color="cyan" wireframe />
-      </mesh> */}
       <mesh
         geometry={nodes.Cube.geometry}
         material={materials.Material}
@@ -51,7 +43,6 @@ export function Case() {
           getInf(current.depth, min.depth, max.depth),
         ]}
         castShadow
-        receiveShadow
       >
         <meshStandardMaterial
           map={materials.Material.map}

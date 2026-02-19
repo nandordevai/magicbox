@@ -23,7 +23,7 @@ const defaultSize: Dimensions = {
 }
 
 export const useStore = create<BoxState>((set) => ({
-  color: '#69f',
+  color: '#6699ff',
   current: defaultSize,
   min: defaultSize,
   max: defaultSize,
