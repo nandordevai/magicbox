@@ -44,7 +44,12 @@ export default function App() {
         >
 
           <ambientLight intensity={0.75} />
-          <directionalLight position={[0.5, 1, 1.5]} color="#fff" castShadow />
+          <directionalLight
+            position={[0.5, 1, 1.5]}
+            color="#fff"
+            castShadow
+            shadow-mapSize={[1024, 1024]}
+          />
 
           <Bounds fit clip observe margin={1.5}>
             <SmartBounds />
@@ -52,11 +57,11 @@ export default function App() {
           </Bounds>
 
           <ContactShadows
-            position={[0, 0, 0]}
-            opacity={0.8}
-            scale={20}
-            blur={2}
-            far={50}
+            position={[0, -0.1, 0]}
+            opacity={0.9}
+            scale={5}
+            blur={1}
+            far={20}
           />
 
           <OrbitControls makeDefault />

@@ -8,8 +8,6 @@ import { useGLTF } from '@react-three/drei'
 import { type GLTF } from 'three-stdlib'
 import { useStore } from './store'
 
-type GLTFAction = Record<string, THREE.AnimationAction>
-
 type GLTFResult = GLTF & {
   nodes: {
     Cube: THREE.Mesh
@@ -17,7 +15,6 @@ type GLTFResult = GLTF & {
   materials: {
     Material: THREE.MeshStandardMaterial
   }
-  animations: GLTFAction[]
 }
 
 export function Case() {
@@ -32,6 +29,8 @@ export function Case() {
         geometry={nodes.Cube.geometry}
         material={materials.Material}
         morphTargetInfluences={[influenceW, influenceH, influenceD]}
+        castShadow
+        receiveShadow
       >
         <meshStandardMaterial
           map={materials.Material.map}
