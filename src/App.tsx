@@ -40,7 +40,7 @@ export default function App() {
           gl={{ preserveDrawingBuffer: true }}
         >
 
-          <ambientLight intensity={0.75} />
+          <ambientLight intensity={0.95} />
           <directionalLight
             position={[0.5, 1, 1.5]}
             color="#fff"
