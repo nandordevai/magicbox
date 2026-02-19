@@ -4,34 +4,34 @@ import { useStore } from './store'
 import './Sidebar.css'
 
 export function Sidebar() {
-  const { width, height, depth, setSize } = useStore()
+  const { current, min, max, setDimensions } = useStore()
 
   return (
     <aside className="sidebar">
       <h2>Box Settings</h2>
 
       <Slider
-        min={40}
-        max={120}
+        min={min.width}
+        max={max.width}
         label="Width"
-        value={width}
-        onChange={(val) => setSize('w', val)}
+        value={current.width}
+        onChange={(val) => setDimensions({ width: val })}
       />
 
       <Slider
-        min={20}
-        max={50}
+        min={min.height}
+        max={max.height}
         label="Height"
-        value={height}
-        onChange={(val) => setSize('h', val)}
+        value={current.height}
+        onChange={(val) => setDimensions({ height: val })}
       />
 
       <Slider
-        min={20}
-        max={100}
+        min={min.depth}
+        max={max.depth}
         label="Depth"
-        value={depth}
-        onChange={(val) => setSize('d', val)}
+        value={current.depth}
+        onChange={(val) => setDimensions({ depth: val })}
       />
 
       <ColorPicker />

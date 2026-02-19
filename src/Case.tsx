@@ -7,6 +7,7 @@ import * as THREE from 'three'
 import { useGLTF } from '@react-three/drei'
 import { type GLTF } from 'three-stdlib'
 import { useStore } from './store'
+import { useEffect } from 'react'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -18,17 +19,37 @@ type GLTFResult = GLTF & {
 }
 
 export function Case() {
-  const { width, height, depth, color } = useStore()
+  const { current, color, min, max, syncMetadata } = useStore()
   const { nodes, materials } = useGLTF('/case.glb') as unknown as GLTFResult
-  const influenceW = (width - 40) / (120 - 40)
-  const influenceH = (height - 10) / (50 - 10)
-  const influenceD = (depth - 20) / (100 - 20)
+
+  useEffect(() => {
+    const meta = nodes.Cube.userData
+    syncMetadata(
+      { width: meta.minWidth, height: meta.minHeight, depth: meta.minDepth },
+      { width: meta.maxWidth, height: meta.maxHeight, depth: meta.maxDepth }
+    )
+  }, [nodes])
+
+  const getInf = (v: number, minV: number, maxV: number) => (v - minV) / (maxV - minV)
+
   return (
     <group dispose={null}>
+      {/* <mesh position={[0, 0, 0]}>
+        <boxGeometry
+          args={
+            [current.width * 0.01, current.height * 0.01, current.depth * 0.01]
+          }
+        />
+        <meshBasicMaterial color="cyan" wireframe />
+      </mesh> */}
       <mesh
         geometry={nodes.Cube.geometry}
         material={materials.Material}
-        morphTargetInfluences={[influenceW, influenceH, influenceD]}
+        morphTargetInfluences={[
+          getInf(current.width, min.width, max.width),
+          getInf(current.height, min.height, max.height),
+          getInf(current.depth, min.depth, max.depth),
+        ]}
         castShadow
         receiveShadow
       >

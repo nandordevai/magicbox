@@ -1,27 +1,24 @@
 import { useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Bounds, ContactShadows, OrbitControls, useBounds } from '@react-three/drei'
-import { useStore } from './store'
 import { Sidebar } from './Sidebar'
 import { Case } from './Case'
 import './App.css'
-
-function SmartBounds() {
-  const api = useBounds()
-  const { width, height, depth } = useStore()
-
-  useEffect(() => {
-    const handler = setTimeout(() => {
-      api.refresh().clip().fit()
-    }, 150)
-    return () => clearTimeout(handler)
-  }, [width, height, depth, api])
-
-  return null
-}
+import { useStore } from './store'
 
 export default function App() {
   const [count, setCount] = useState(0)
+  const { current, min } = useStore()
+  const isLoaded = current.width > 0
+  const yOffset = (current.height - min.height) * 0.01 / 2
+  const bounds = useBounds()
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      bounds.refresh().clip().fit()
+    }, 150)
+    return () => clearTimeout(timer)
+  }, [bounds])
 
   useEffect(() => {
     if (import.meta.hot) {
@@ -36,7 +33,7 @@ export default function App() {
       <main className='viewport'>
         <Canvas
           className="canvas"
-          camera={{ position: [0, 3, 5], fov: 60 }}
+          camera={{ position: [0, 3, 5], fov: 40 }}
           dpr={[1, 2]}
           key={count}
           shadows
@@ -51,10 +48,21 @@ export default function App() {
             shadow-mapSize={[1024, 1024]}
           />
 
-          <Bounds fit clip observe margin={1.5}>
-            <SmartBounds />
-            <Case />
-          </Bounds>
+          {isLoaded && <Bounds fit clip observe margin={1.25}>
+            <mesh position={[0, yOffset, 0]}>
+              <boxGeometry
+                args={
+                  [
+                    current.width * 0.01,
+                    current.height * 0.01,
+                    current.depth * 0.01,
+                  ]
+                }
+              />
+              <meshBasicMaterial transparent opacity={0} />
+            </mesh>
+          </Bounds>}
+          <Case />
 
           <ContactShadows
             position={[0, -0.1, 0]}
