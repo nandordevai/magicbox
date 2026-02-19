@@ -4,13 +4,13 @@ import { Bounds, ContactShadows, OrbitControls, useBounds } from '@react-three/d
 import { Sidebar } from './Sidebar'
 import { Case } from './Case'
 import './App.css'
-import { useStore } from './store'
+import { useStore, type Dimensions } from './store'
 
-export default function App() {
-  const [count, setCount] = useState(0)
-  const { current, min } = useStore()
-  const isLoaded = current.width > 0
-  const yOffset = (current.height - min.height) * 0.01 / 2
+interface BoundsProps {
+  current: Dimensions
+}
+
+function BoundsController({ current }: BoundsProps) {
   const bounds = useBounds()
 
   useEffect(() => {
@@ -18,7 +18,16 @@ export default function App() {
       bounds.refresh().clip().fit()
     }, 150)
     return () => clearTimeout(timer)
-  }, [bounds])
+  }, [current, bounds])
+
+  return null
+}
+
+export default function App() {
+  const [count, setCount] = useState(0)
+  const { current, min } = useStore()
+  const isLoaded = current.width > 0
+  const yOffset = (current.height - min.height) * 0.01 / 2
 
   useEffect(() => {
     if (import.meta.hot) {
@@ -48,7 +57,8 @@ export default function App() {
             shadow-mapSize={[1024, 1024]}
           />
 
-          {isLoaded && <Bounds fit clip observe margin={1.25}>
+          {isLoaded && <Bounds fit clip margin={1.25}>
+            <BoundsController current={current} />
             <mesh position={[0, yOffset, 0]}>
               <boxGeometry
                 args={

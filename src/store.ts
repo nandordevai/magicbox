@@ -10,7 +10,7 @@ interface BoxState {
   syncMetadata: (min: Dimensions, max: Dimensions) => void
 }
 
-interface Dimensions {
+export interface Dimensions {
   width: number
   height: number
   depth: number

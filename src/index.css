@@ -33,6 +33,10 @@ body {
   height: 100dvh;
   font-family: 'Helvetica', 'Arial', system-ui, sans-serif;
   place-items: center;
+
+  @media (max-width: 900px) {
+    padding: 1rem;
+  }
 }
 
 #root {
@@ -50,4 +54,11 @@ body {
   grid-template-columns: 2fr 1fr;
   height: 30rem;
   width: 45rem;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    height: 95dvh;
+    width: 90dvw;
+  }
 }
