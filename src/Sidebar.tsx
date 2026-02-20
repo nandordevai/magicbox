@@ -6,6 +6,14 @@ import './Sidebar.css'
 export function Sidebar() {
   const { current, min, max, setDimensions } = useStore()
 
+  if (current.width === 0) {
+    return (
+      <aside className="sidebar">
+        <p>loading model…</p>
+      </aside>
+    )
+  }
+
   return (
     <aside className="sidebar">
       <h2>Box Settings</h2>
@@ -14,7 +22,7 @@ export function Sidebar() {
         min={min.width}
         max={max.width}
         label="Width"
-        value={current.width}
+        value={current.width ?? 0}
         onChange={(val) => setDimensions({ width: val })}
       />
 
@@ -22,7 +30,7 @@ export function Sidebar() {
         min={min.height}
         max={max.height}
         label="Height"
-        value={current.height}
+        value={current.height ?? 0}
         onChange={(val) => setDimensions({ height: val })}
       />
 
@@ -30,7 +38,7 @@ export function Sidebar() {
         min={min.depth}
         max={max.depth}
         label="Depth"
-        value={current.depth}
+        value={current.depth ?? 0}
         onChange={(val) => setDimensions({ depth: val })}
       />
 

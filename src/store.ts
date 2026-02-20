@@ -27,7 +27,15 @@ export const useStore = create<BoxState>((set) => ({
   current: defaultSize,
   min: defaultSize,
   max: defaultSize,
-  setColor: (val) => set({ color: val}),
+  setColor: (val) => set({ color: val }),
   setDimensions: (dims) => set((state) => ({ current: { ...state.current, ...dims } })),
-  syncMetadata: (min, max) => set({ min, max, current: min })
+  syncMetadata: (min, max) => set((state) => ({
+    min: { ...state.min, ...min },
+    max: { ...state.max, ...max },
+    current: {
+      width: min.width ?? 0,
+      height: min.height ?? 0,
+      depth: min.depth ?? 0,
+    }
+  }))
 }))

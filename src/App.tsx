@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
-import { Bounds, ContactShadows, OrbitControls, useBounds } from '@react-three/drei'
+import { Bounds, ContactShadows, Environment, OrbitControls, useBounds } from '@react-three/drei'
 import { Sidebar } from './Sidebar'
 import { Case } from './Case'
 import './App.css'
@@ -49,15 +49,11 @@ export default function App() {
           gl={{ preserveDrawingBuffer: true }}
         >
 
-          <ambientLight intensity={0.95} />
-          <directionalLight
-            position={[0.5, 1, 1.5]}
-            color="#fff"
-            castShadow
-            shadow-mapSize={[1024, 1024]}
-          />
+          <Environment preset='city' />
 
-          {isLoaded && <Bounds fit clip margin={1.25}>
+          <ambientLight intensity={.25} />
+
+          {isLoaded && <Bounds fit clip margin={1.5}>
             <BoundsController current={current} />
             <mesh position={[0, yOffset, 0]}>
               <boxGeometry
