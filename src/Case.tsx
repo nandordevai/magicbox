@@ -12,9 +12,15 @@ import { useEffect } from 'react'
 type GLTFResult = GLTF & {
   nodes: {
     Box: THREE.Mesh
-    Cage: THREE.Mesh
+    Cage_Lower: THREE.Mesh
+    Cage_Upper: THREE.Mesh
+    Lid: THREE.Mesh
+    Corners: THREE.Mesh
     Handle: THREE.Mesh
+    Handle_attach: THREE.Mesh
     Hardware: THREE.Mesh
+    Latch: THREE.Mesh
+    Hinge: THREE.Mesh
   }
   materials: {
     Box: THREE.MeshStandardMaterial
