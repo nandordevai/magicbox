@@ -27,7 +27,7 @@ export default function App() {
   const [count, setCount] = useState(0)
   const { current, min } = useStore()
   const isLoaded = current.width > 0
-  const yOffset = (current.height - min.height) * 0.01 / 2
+  const yOffset = (current.height - min.height) * 0.001 / 2
 
   useEffect(() => {
     if (import.meta.hot) {
@@ -42,7 +42,7 @@ export default function App() {
       <main className='viewport'>
         <Canvas
           className="canvas"
-          camera={{ position: [0, 3, 5], fov: 40 }}
+          camera={{ position: [-3, 3, -5], fov: 40 }}
           dpr={[1, 2]}
           key={count}
           shadows
@@ -59,9 +59,9 @@ export default function App() {
               <boxGeometry
                 args={
                   [
-                    current.width * 0.01,
-                    current.height * 0.01,
-                    current.depth * 0.01,
+                    current.width * 0.001,
+                    current.height * 0.001,
+                    current.depth * 0.001,
                   ]
                 }
               />

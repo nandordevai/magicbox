@@ -16,11 +16,11 @@ export function Slider({ min, max, label, value, onChange }: SliderProps ) {
     <div className="slider">
       <label className="slider-label">
         <span className="label-text">{label}</span>
-        <span className="label-value">{value} cm</span>
+        <span className="label-value">{value} mm</span>
       </label>
       <input
         className='slider-input'
-        type="range" min={min} max={max} step="1"
+        type="range" min={min} max={max} step="10"
         value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
         style={{ '--progress': `${percentage}%` } as any }
