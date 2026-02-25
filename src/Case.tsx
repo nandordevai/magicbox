@@ -30,7 +30,7 @@ type GLTFResult = GLTF & {
 
 export function Case() {
   const { current, color, min, max, syncMetadata } = useStore()
-  const { nodes, materials } = useGLTF('./case.glb') as unknown as GLTFResult
+  const { nodes, materials } = useGLTF('case.glb') as unknown as GLTFResult
 
   useEffect(() => {
     const meta = nodes.Box?.userData
@@ -159,4 +159,4 @@ export function Case() {
   )
 }
 
-useGLTF.preload('./case.glb')
+useGLTF.preload('case.glb')
